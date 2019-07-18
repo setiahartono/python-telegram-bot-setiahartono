@@ -1,4 +1,4 @@
-# Dillinger
+# Python Telegram Bot
 
 A simple Telegram Bot made using Python.
 
