@@ -1,3 +1,5 @@
+from telegram import KeyboardButton, ReplyKeyboardMarkup
+
 import requests
 import settings
 from message_handlers import get_reply
@@ -18,6 +20,17 @@ def bop(bot, update):
     url = contents['url']
     chat_id = update.message.chat_id
     bot.send_photo(chat_id=chat_id, photo=url)
+
+
+def location(bot, update):
+    print("{} requests /location".format(update.message.from_user.first_name))
+    location_keyboard = [
+        [KeyboardButton(text="Share Location", request_location=True, one_time_keyboard=True)],
+        [KeyboardButton(text="Cancel", one_time_keyboard=True)]
+    ]
+    reply_markup = ReplyKeyboardMarkup(location_keyboard)
+    bot.send_message(update.message.chat_id, "Share location?", reply_markup=reply_markup)
+    print(update.message.location.latitude, update.message.location.longitude)
 
 
 def praying_time(bot, update):

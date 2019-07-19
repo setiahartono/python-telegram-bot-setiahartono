@@ -12,8 +12,10 @@ def main():
     dp.add_handler(CommandHandler('bop', commands.bop))
     dp.add_handler(CommandHandler('sholat', commands.praying_time))
     dp.add_handler(CommandHandler('help', commands.help_list))
+    dp.add_handler(CommandHandler('location', commands.location))
 
     dp.add_handler(MessageHandler(Filters.text, message_handlers.text_handler))
+    dp.add_handler(MessageHandler(Filters.location, message_handlers.location_handler))
 
     print("Starting Telegram Bot: {}".format(updater.bot.name))
     updater.start_polling()
