@@ -5,7 +5,8 @@ import message_handlers
 import settings
 
 
-def main():
+# Get updater instance with handlers
+def get_updater():
     updater = Updater(settings.TOKEN)
     dp = updater.dispatcher
 
@@ -16,6 +17,21 @@ def main():
 
     dp.add_handler(MessageHandler(Filters.text, message_handlers.text_handler))
     dp.add_handler(MessageHandler(Filters.location, message_handlers.location_handler))
+    return updater
+
+
+# Set a webhook for deployment
+def webhook(request):
+    if request.method == "POST":
+        updater = get_updater()
+        updater.start_polling()
+        updater.idle()
+    return "ok"
+
+
+# Local function to run, for development
+def main():
+    updater = get_updater()
 
     print("Starting Telegram Bot: {}".format(updater.bot.name))
     updater.start_polling()
