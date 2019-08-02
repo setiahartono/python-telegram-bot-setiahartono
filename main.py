@@ -26,7 +26,7 @@ def webhook(request):
         updater = get_updater()
         updater.start_polling()
         updater.idle()
-    return "ok"
+    return "ok\n"
 
 
 # Local function to run, for development
